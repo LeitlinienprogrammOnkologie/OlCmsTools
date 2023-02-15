@@ -75,7 +75,7 @@ def GetAuthorList(guideline):
                 result.append(author)
     return result
 
-out_str = "Leitlinie|Version|Jahr|Author|Inhaltstyp|Position|Referenz|Link\n"
+out_str = "Leitlinie|Version|Jahr|Author|Inhaltstyp|Position|Referenz|Link|Referenzen (gesamt)\n"
 out_list = []
 
 author_total_str = "Leitlinie|Version|Jahr|Author\n"
@@ -98,20 +98,33 @@ for guideline in guideline_list:
         author_list = GetAuthorList(guideline_full)
         author_list.sort(key=lambda x: x[1])
 
-        author_item = ["%s|%s|%s|%s" % (guideline_full['short_title'], guideline_full['published_version'], guideline_date.year, "%s, %s" % (x[1], x[2])) for x in author_list]
+        author_item = ["%s|%s|%s|%s" % (guideline_full['short_title'], "\"%s\"" % guideline_full['published_version'], guideline_date.year, "%s, %s" % (x[1], x[2])) for x in author_list]
         author_total_str += "\n".join(author_item)
 
         for lit_ref in guideline_full['literature_list']:
+            if lit_ref['au'] is None:
+                continue
+
+            tag_text = html2text.handle(lit_ref['tag'])
+
             for guideline_author in author_list:
                 author_str = "%s, %s" % (guideline_author[1], guideline_author[2][0])
-                if lit_ref['au'] is not None and any(x == author_str for x in lit_ref['au']):
-                    index = lit_ref['au'].index(author_str)
+                if author_str in tag_text:
+                    index = -1
+                    try:
+                        index = lit_ref['au'].index(author_str)
+                    except:
+                        for i in range(len(lit_ref['au'])):
+                            if author_str in lit_ref['au'][i]:
+                                index = i
+                                break
+
                     if index == 0:
-                        position = "ERSTAUTOR"
+                        position = "Erstautor"
                     elif index == len(lit_ref['au'])-1:
-                        position = "LETZTAUTOR"
+                        position = "Letztautor"
                     else:
-                        position = ""
+                        position = "Standard"
 
                     tag = ParseLitref(lit_ref)
                     if lit_ref['user_definable_url'] is not None:
@@ -120,13 +133,15 @@ for guideline in guideline_list:
                         url = ""
 
                     if lit_ref['id'] in litref_reco_id_list:
-                        out_item = "%s|%s|%s|%s|Empfehlung|%s|%s|%s" % (guideline_full['short_title'], guideline_full['published_version'], guideline_date.year, "%s, %s" % (guideline_author[1], guideline_author[2]), position, tag, url)
+                        out_item = "%s|%s|%s|%s|Empfehlung|%s|%s|%s|%s" % (guideline_full['short_title'], "\"%s\"" % guideline_full['published_version'], guideline_date.year, "%s, %s" % (guideline_author[1], guideline_author[2]), position, tag, url, len(guideline_full['literature_list']))
                         if out_item not in out_list:
                             out_list.append(out_item)
                     if lit_ref['id'] in litref_hgt_id_list:
-                        out_item = "%s|%s|%s|%s|Hintergrund|%s|%s|%s" % (guideline_full['short_title'], guideline_full['published_version'], guideline_date.year, "%s, %s" % (guideline_author[1], guideline_author[2]), position, tag, url)
+                        out_item = "%s|%s|%s|%s|Hintergrund|%s|%s|%s|%s" % (guideline_full['short_title'], "\"%s\"" % guideline_full['published_version'], guideline_date.year, "%s, %s" % (guideline_author[1], guideline_author[2]), position, tag, url, len(guideline_full['literature_list']))
                         if out_item not in out_list:
                             out_list.append(out_item)
+
+    if "olorektal" in guideline_full['short_title']:
         pass
 
 out_str += "\n".join(out_list)
