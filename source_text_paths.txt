@@ -1,0 +1,23 @@
+{
+    "files" : [
+        {
+            "title": "Endometrial",
+            "pll": "//dkg-dc-01/Daten/Daten/Arbeitsverzeichnisse/OL/PatientenLL/Manuskripte PLL/Endometrium/version1/2020-12-23_PLL Gebärmutterkörperkrebs_Konsultationsfassung.docx",
+            "s3": "//dkg-dc-01/Daten/Daten/Arbeitsverzeichnisse/OL/1 Dokumente zu laufenden LL/Endometrium/Version 2 (2019-2022)/Leitlinienversionen/Langversion/LL_Endometriumkarzinom_Langversion 2.0_2023-01-02_korr.docx",
+            "br": "//dkg-dc-01/Daten/Daten/Arbeitsverzeichnisse/OL/PatientenLL/Blaue Ratgeber/002_0022_Brust_v01-WORDEXPORT.docx"
+        },
+        {
+            "title": "Actinic Keratosis and Squamous Cell Carcinoma of the Skin",
+            "pll": "//dkg-dc-01/Daten/Daten/Arbeitsverzeichnisse/OL/PatientenLL/Manuskripte PLL/AK-PEK/Konsultation/Konsultationsfassung_Pat-LL_AK-PEK.docx",
+            "s3": "//dkg-dc-01/Daten/Daten/Arbeitsverzeichnisse/OL/1 Dokumente zu laufenden LL/AK und PEK/Version 2 (2019-     )/Leitlinenversionen/Langversion/Aktinische Keratose und Plattenepithelkarzinom der Haut_07.03_2022.docx",
+            "br": ""
+        },
+        {
+            "title": "Anal",
+            "pll": "//dkg-dc-01/Daten/Daten/Arbeitsverzeichnisse/OL/PatientenLL/Manuskripte PLL/Analkarzinom/Pat-LL_Analkarzinom_überarb_final_clean.docx",
+            "s3": "//dkg-dc-01/Daten/Daten/Arbeitsverzeichnisse/OL/1 Dokumente zu laufenden LL/Analkarzinom/Leitlinienversionen/Version 1/LL_Analkarzinom_Langversion_1.2_15122020_.docx",
+            "br": ""
+        }
+
+    ]
+}
