@@ -24,7 +24,7 @@ class BrWordFileParser:
             if len(paragraph.text.strip()) == 0:
                 continue
             if "H1" in paragraph.style.name and paragraph.style.name.index("H1") == 0:
-                current_chaptername = paragraph.text
+                current_chaptername = paragraph.text.replace("\n", " ").replace("\r", " ").replace("  ", " ").strip()
                 pass
             if current_chaptername.strip().upper() in self.forbidden_chaptername_list:
                 continue

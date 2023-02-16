@@ -7,9 +7,10 @@ html2text = HTML2Text()
 service = GuidelineService()
 
 guideline_list = service.download_guideline_list()
-litref_reco_id_list = []
+litref_reco_id_dict = {}
 litref_hgt_id_list = []
 author_total_list = []
+litref_qi_reco_id_list = []
 
 def ParseTextLitref(text):
     result = []
@@ -24,17 +25,52 @@ def ParseTextLitref(text):
 
     return result
 
+def get_reco_type(reco):
+    if 'type_of_recommendation' in reco and reco['type_of_recommendation'] is not None and 'name' in reco['type_of_recommendation'] and reco['type_of_recommendation']['name'] is not None:
+        return reco['type_of_recommendation']['name']
+    else:
+        return ""
+def get_GOR(reco):
+    result = ""
+    if len(reco['recommendation_grade']) > 0:
+        if 'tite' in reco['recommendation_grade'] and reco['recommendation_grade']['title'] is not None:
+            result = reco['recommendation_grade']['title']
+
+    if result == "":
+        if "sollte" in reco['text']:
+            return "B"
+        elif "soll" in reco['text']:
+            return "A"
+        elif "kann" in reco['text'] or "können" in reco['text']:
+            return "0"
+        else:
+            if "statement" not in reco['type_of_recommendation']['id']:
+                pass
+            return ""
+    else:
+        return result
+
 def GetRecommendationLiterature(content):
     for content_element in content['subsections']:
         reco_result = None
         hgt_result = None
         if content_element['type'] == "RecommendationCT":
             reco_result = [x['id'] for x in content_element['literature_references']]
+            for litref_id in reco_result:
+                if litref_id not in litref_reco_id_dict:
+                    litref_reco_id_dict[litref_id] = []
+                if content_element not in litref_reco_id_dict[litref_id]:
+                    litref_reco_id_dict[litref_id].append(content_element)
         elif content_element['type'] == "TextCT" and "data-litref_json" in content_element['text']:
             hgt_result = ParseTextLitref(content_element['text'])
+        elif content_element['type'].lower() == "qualityindicatorct":
+            if content_element['reference_recommendations'] is not None:
+                for j in range(0, len(content_element['reference_recommendations'])):
+                    reco = content_element['reference_recommendations'][j]
+                    litref_qi_reco_id_list.append(reco['uid'])
 
-        if reco_result is not None and len(reco_result) > 0:
-            litref_reco_id_list.extend(reco_result)
+        #if reco_result is not None and len(reco_result) > 0:
+        #    litref_reco_id_dict.extend(reco_result)
 
         if hgt_result is not None and len(hgt_result) > 0:
             litref_hgt_id_list.extend(hgt_result)
@@ -75,7 +111,7 @@ def GetAuthorList(guideline):
                 result.append(author)
     return result
 
-out_str = "Leitlinie|Version|Jahr|Author|Inhaltstyp|Position|Referenz|Link|Referenzen (gesamt)\n"
+out_str = "Leitlinie|Version|Jahr|Author|Inhaltstyp|Gor|in QI|Position|Referenz|Link|Referenzen (gesamt)\n"
 out_list = []
 
 author_total_str = "Leitlinie|Version|Jahr|Author\n"
@@ -132,12 +168,17 @@ for guideline in guideline_list:
                     else:
                         url = ""
 
-                    if lit_ref['id'] in litref_reco_id_list:
-                        out_item = "%s|%s|%s|%s|Empfehlung|%s|%s|%s|%s" % (guideline_full['short_title'], "\"%s\"" % guideline_full['published_version'], guideline_date.year, "%s, %s" % (guideline_author[1], guideline_author[2]), position, tag, url, len(guideline_full['literature_list']))
-                        if out_item not in out_list:
-                            out_list.append(out_item)
+                    if lit_ref['id'] in litref_reco_id_dict:
+                        #gor = reco_gor_dict[lit_ref['id']]
+                        for reco in litref_reco_id_dict[lit_ref['id']]:
+                            gor = get_GOR(reco)
+                            reco_type = get_reco_type(reco)
+                            in_qi = reco['uid'] in litref_qi_reco_id_list
+                            out_item = "%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s" % (guideline_full['short_title'], "\"%s\"" % guideline_full['published_version'], guideline_date.year, "%s, %s" % (guideline_author[1], guideline_author[2]), reco_type, gor, in_qi, position, tag, url, len(guideline_full['literature_list']))
+                            if out_item not in out_list:
+                                out_list.append(out_item)
                     if lit_ref['id'] in litref_hgt_id_list:
-                        out_item = "%s|%s|%s|%s|Hintergrund|%s|%s|%s|%s" % (guideline_full['short_title'], "\"%s\"" % guideline_full['published_version'], guideline_date.year, "%s, %s" % (guideline_author[1], guideline_author[2]), position, tag, url, len(guideline_full['literature_list']))
+                        out_item = "%s|%s|%s|%s|Hintergrund|||%s|%s|%s|%s" % (guideline_full['short_title'], "\"%s\"" % guideline_full['published_version'], guideline_date.year, "%s, %s" % (guideline_author[1], guideline_author[2]), position, tag, url, len(guideline_full['literature_list']))
                         if out_item not in out_list:
                             out_list.append(out_item)
 

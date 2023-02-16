@@ -11,11 +11,10 @@ import numpy as np
 import nltk
 from nltk.tokenize import sent_tokenize, word_tokenize
 
-openai.api_key = "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"
+openai.api_key = "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"
 model_engine = "text-davinci-003"
 
-'''
-prompt = "Until further notice, switch to German language"
+prompt = "Until further notice, switch to German language. Verwende niemals Nebensätze, niemals Relativsätze und umschreibe alle Fachwörter."
 completion = openai.Completion.create(
     engine=model_engine,
     prompt=prompt,
@@ -26,54 +25,63 @@ completion = openai.Completion.create(
 )
 
 response = completion.choices[0].text
-'''
+print(response)
+
 pass
 
 with open("source_text_paths.txt", "r", encoding="utf-8") as f:
     source_file_list = json.load(f)
 
-def analyze_paragraphs(paragraph_dict):
+def analyze_paragraphs(guideline, type, paragraph_dict, translate_type=None):
+    result = ""
     index_calculator = IndexCalculator()
-    out_dict = {}
+    translated_text = ""
     for key, text_list in paragraph_dict.items():
         for text in text_list:
+            text = text.replace("\n", " ").replace("\r", " ").replace("  ", " ").strip()
             metrics = index_calculator.Handle(text)
             if metrics is not None:
-                if key not in out_dict:
-                    out_dict[key] = {}
-                out_dict[key][text] = metrics
+                result += add_to_csv(guideline, type, key, metrics, text)
+            if translate_type is not None:
+                translated_text = translate_text_to_easy_langage(text).replace("\n", " ").replace("\r", " ").replace("  ", " ").strip()
+                print(translated_text)
+                metrics = index_calculator.Handle(translated_text)
+                if metrics is not None:
+                    result += add_to_csv(guideline, translate_type, key, metrics, translated_text)
+    return result
 
-    return out_dict
+out_csv = "Leitlinie|Typ|Kapitel|Text|Chars|Words|Types|Sentences|Syllables|Polysyllable Words|Difficult Words|Words > 4|Words > 6|Words > 10|Words > 13|ASL|ASW|Flesh-Kincaid|Coleman-Liau|Gunning-Fog|Smog|ARI|LIX|Dale-Chall\n"
 
-out_csv = "Leitlinie|Typ|Kapitel 1|Kapitel 2|Chars|Words|Types|Sentences|Syllables|Polysyllable Words|Difficult Words|Words > 4|Words > 6|Words > 10|Words > 13\n"
-
-def add_to_csv(out_dict, guideline, type):
-    result = ""
-    for k, v in out_dict.items():
-        chapter_1 = k
-        for k1, v1 in v.items():
-            chapter_2 = k1
-            chapter_2 = ""
-            if "Die Indikation für eine psychoonkologische Versorgung erfolgt" in chapter_2:
-                pass
-            if v1.number_words > 0:
-                result += "%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s\n" % (
-                    guideline,
-                    type,
-                    chapter_1,
-                    chapter_2,
-                    v1.number_chars,
-                    v1.number_words,
-                    v1.number_types,
-                    v1.number_sentences,
-                    v1.number_syllables,
-                    v1.number_polysyllable_words,
-                    v1.difficult_words,
-                    v1.number_words_longer_4,
-                    v1.number_words_longer_6,
-                    v1.number_words_longer_10,
-                    v1.number_words_longer_13
-                )
+def add_to_csv(guideline, type, chapter, metric, text):
+    if metric is not None and metric.number_words > 0:
+        result = "%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s\n" % (
+            guideline,
+            type,
+            chapter,
+            text,
+            metric.number_chars,
+            metric.number_words,
+            metric.number_types,
+            metric.number_sentences,
+            metric.number_syllables,
+            metric.number_polysyllable_words,
+            metric.difficult_words,
+            metric.number_words_longer_4,
+            metric.number_words_longer_6,
+            metric.number_words_longer_10,
+            metric.number_words_longer_13,
+            metric.ASL,
+            metric.ASW,
+            metric.flesch_reading_ease,
+            metric.coleman_liau_index,
+            metric.gunning_fog_index,
+            metric.smog_index,
+            metric.ari_index,
+            metric.lix_index,
+            metric.dale_chall_score
+        )
+    else:
+        result = None
     return result
 
 def translate_text_to_easy_langage(text):
@@ -90,31 +98,20 @@ def translate_text_to_easy_langage(text):
     response = completion.choices[0].text
     return response
 
-def translate_dict(item_dict):
-    for k, v in out_dict.items():
-        for k1, v1 in v.items():
-            pass
-
 for guideline in source_file_list['files']:
-
-    parser = PllWordFileParser()
-    paragraph_dict = parser.Parse(guideline['pll'])
-    out_dict = analyze_paragraphs(paragraph_dict)
-    out_csv += add_to_csv(out_dict, guideline['title'], 'PLL')
-
-    translate_dict(paragraph_dict)
-    out_csv += add_to_csv(out_dict, guideline['title'], 'EASY')
-
-    parser = S3WordFileParser()
-    paragraph_dict = parser.Parse(guideline['s3'])
-    out_dict = analyze_paragraphs(paragraph_dict)
-    out_csv += add_to_csv(out_dict, guideline['title'], 'S3L')
 
     if len(guideline['br']) > 0:
         parser = BrWordFileParser()
         paragraph_dict = parser.Parse(guideline['br'])
-        out_dict = analyze_paragraphs(paragraph_dict)
-        out_csv += add_to_csv(out_dict, guideline['title'], 'BR')
+        out_csv += analyze_paragraphs(guideline['title'], "BR", paragraph_dict)
+
+    parser = PllWordFileParser()
+    paragraph_dict = parser.Parse(guideline['pll'])
+    out_csv += analyze_paragraphs(guideline['title'], "PLL", paragraph_dict, "DV3")
+
+    parser = S3WordFileParser()
+    paragraph_dict = parser.Parse(guideline['s3'])
+    out_csv += analyze_paragraphs(guideline['title'], "S3L", paragraph_dict)
 
     with open("count_results.csv", "w", encoding="utf-8") as f:
         f.write(out_csv)

@@ -1,23 +1,70 @@
 {
     "files" : [
         {
-            "title": "Endometrial",
-            "pll": "//dkg-dc-01/Daten/Daten/Arbeitsverzeichnisse/OL/PatientenLL/Manuskripte PLL/Endometrium/version1/2020-12-23_PLL Gebärmutterkörperkrebs_Konsultationsfassung.docx",
-            "s3": "//dkg-dc-01/Daten/Daten/Arbeitsverzeichnisse/OL/1 Dokumente zu laufenden LL/Endometrium/Version 2 (2019-2022)/Leitlinienversionen/Langversion/LL_Endometriumkarzinom_Langversion 2.0_2023-01-02_korr.docx",
-            "br": "//dkg-dc-01/Daten/Daten/Arbeitsverzeichnisse/OL/PatientenLL/Blaue Ratgeber/002_0022_Brust_v01-WORDEXPORT.docx"
-        },
-        {
-            "title": "Actinic Keratosis and Squamous Cell Carcinoma of the Skin",
-            "pll": "//dkg-dc-01/Daten/Daten/Arbeitsverzeichnisse/OL/PatientenLL/Manuskripte PLL/AK-PEK/Konsultation/Konsultationsfassung_Pat-LL_AK-PEK.docx",
-            "s3": "//dkg-dc-01/Daten/Daten/Arbeitsverzeichnisse/OL/1 Dokumente zu laufenden LL/AK und PEK/Version 2 (2019-     )/Leitlinenversionen/Langversion/Aktinische Keratose und Plattenepithelkarzinom der Haut_07.03_2022.docx",
+            "title": "Follicular Lymphoma",
+            "pll": "\\dkg-dc-01\Daten\Daten\Arbeitsverzeichnisse\OL\PatientenLL\Manuskripte PLL\Follikuläres Lymphom\2022-09-16_PLL_Follikuläres Lyphom.docx",
+            "s3": "\\dkg-dc-01\Daten\Daten\Arbeitsverzeichnisse\OL\1 Dokumente zu laufenden LL\follLymphom\Leitlinienversionen\Version 1\LL_Foll_Lymphom_Langversion_1.0_TL.docx",
             "br": ""
         },
         {
-            "title": "Anal",
-            "pll": "//dkg-dc-01/Daten/Daten/Arbeitsverzeichnisse/OL/PatientenLL/Manuskripte PLL/Analkarzinom/Pat-LL_Analkarzinom_überarb_final_clean.docx",
-            "s3": "//dkg-dc-01/Daten/Daten/Arbeitsverzeichnisse/OL/1 Dokumente zu laufenden LL/Analkarzinom/Leitlinienversionen/Version 1/LL_Analkarzinom_Langversion_1.2_15122020_.docx",
+            "title": "Prevention of Skin Cancer",
+            "pll": "\\dkg-dc-01\Daten\Daten\Arbeitsverzeichnisse\OL\PatientenLL\Manuskripte PLL\Prävention von Hautkrebs\2022-09-14_Gesundheitsleitlinie_Hautkrebsprävention.docx",
+            "s3": "",
             "br": ""
-        }
-
+        },
+        {
+            "title": "Hepatocellular Cancer",
+            "pll": "\\dkg-dc-01\Daten\Daten\Arbeitsverzeichnisse\OL\PatientenLL\Manuskripte PLL\Leberkrebs\A_2021-11-12_Patientenleitlinie_Leberkrebs_final.docx",
+            "s3": "\\dkg-dc-01\Daten\Daten\Arbeitsverzeichnisse\OL\1 Dokumente zu laufenden LL\Prävention von Hautkrebs\Version 2 (2017-2020)\Leitlinienversionen\Langversion\LL Leitlinie Prävention von Hautkrebs_Langversion 2.01_15012021.docx",
+            "br": ""
+        },
+        {
+            "title": "Testicular Cancer",
+            "pll": "\\dkg-dc-01\Daten\Daten\Arbeitsverzeichnisse\OL\PatientenLL\Manuskripte PLL\Hoden\2022-09-16_PLL_Hodenkrebs_Vorläufig V0.2.docx",
+            "s3": "\\dkg-dc-01\Daten\Daten\Arbeitsverzeichnisse\OL\1 Dokumente zu laufenden LL\HodenTu\Leitlinienversionen\Version 1\Langversion\LL_Hodentumoren_Langversion_1.2_22.04.2021.docx",
+            "br": ""
+        },
+        {
+            "title": "Hodgkin Lymphoma",
+            "pll": "",
+            "s3": "",
+            "br": ""
+        },
+        {
+            "title": "Malignant Melanoma",
+            "pll": "\\dkg-dc-01\Daten\Daten\Arbeitsverzeichnisse\OL\PatientenLL\Manuskripte PLL\Melanom\2021-11-10_PLL_Melanom.docx",
+            "s3": "\\dkg-dc-01\Daten\Daten\Arbeitsverzeichnisse\OL\1 Dokumente zu laufenden LL\Hodgkin\Version 2.0 (2015-2018)\Version 2\Version 2.1\LL Hodgkin-Lymphom Langversion_2.1_03.05.docx",
+            "br": ""
+        },
+        {
+            "title": "Multiple Myeloma",
+            "pll": "\\dkg-dc-01\Daten\Daten\Arbeitsverzeichnisse\OL\PatientenLL\Manuskripte PLL\Multiples Myelom\PLL Multiples Myelom_FinaleVersion_31.10.2022_SM_gw.docx",
+            "s3": "",
+            "br": ""
+        },
+        {
+            "title": "Oral Cavity Cancer",
+            "pll": "\\dkg-dc-01\Daten\Daten\Arbeitsverzeichnisse\OL\PatientenLL\Manuskripte PLL\Mundhöhle\2023-02-01_Methodenreport_PLL_MundhöhlenkrebsWolff.docx",
+            "s3": "",
+            "br": ""
+        },
+        {
+            "title": "Pancreatic Cancer",
+            "pll": "",
+            "s3": "",
+            "br": ""
+        },
+        {
+            "title": "Penis Cancer",
+            "pll": "\\dkg-dc-01\Daten\Daten\Arbeitsverzeichnisse\OL\PatientenLL\Manuskripte PLL\Pankreas\2022-01-25_PLL_Pankreas_finaleVersion.docx",
+            "s3": "",
+            "br": ""
+        },
+        {
+            "title": "Cevical Cancer",
+            "pll": "\\dkg-dc-01\Daten\Daten\Arbeitsverzeichnisse\OL\PatientenLL\Manuskripte PLL\Gebärmutterhals (Zervix)\Methodenreport_PLL Gebärmutterhalskrebs_final.docx",
+            "s3": "",
+            "br": ""
+        },
     ]
 }

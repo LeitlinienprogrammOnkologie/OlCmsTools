@@ -31,7 +31,9 @@ class ReadabilityMetrics:
         self.lix_index = metrics[17]
         self.dale_chall_score = metrics[18]
 
-        self.flesch_de = (180 - (self.number_words / self.number_sentences)) - (58.5 * (self.number_syllables / self.number_words))
+        self.ASL = self.number_words / self.number_sentences
+        self.ASW = self.number_syllables / self.number_words
+        self.FLESH_DE = 180 - self.ASL - (58.5 * self.ASW)
 
 '''
         for k, v in flesh_limit_dict.items():
