@@ -111,7 +111,7 @@ def GetAuthorList(guideline):
                 result.append(author)
     return result
 
-out_str = "Leitlinie|Version|Jahr|Author|Inhaltstyp|Gor|in QI|Position|Referenz|Link|Referenzen (gesamt)\n"
+out_str = "Leitlinie|Version|Jahr|Author|Inhaltstyp|Bester GoR|in QI|Position|Referenz|Link|Referenzen (gesamt)\n"
 out_list = []
 
 author_total_str = "Leitlinie|Version|Jahr|Author\n"
@@ -124,6 +124,26 @@ def ParseLitref(litref):
     result = "%s. %s. %s. %s;%s:%s" % (litref_author_str, litref['title'], litref['periodical_name'], litref['publication_year'], litref['volume_number'], litref['start_page_number'])
     result = result.replace("..", ".")
     return result
+
+def get_best_reco(reco_list):
+    best_reco = reco_list[0]
+    best_reco_gor = get_GOR(reco_list[0])
+    if len(reco_list) > 1:
+        for k in range(1, len(reco_list)):
+            reco = reco_list[k]
+            gor = get_GOR(reco)
+            if len(gor) > 0:
+                if "A" in gor and ("B" in best_reco_gor or "0" in best_reco_gor):
+                    best_reco = reco
+                    best_reco_gor = gor
+                elif "B" in gor and "0" in best_reco_gor:
+                    best_reco = reco
+                    best_reco_gor = gor
+                elif "0" in gor and best_reco_gor != "A" and best_reco_gor != "B":
+                    best_reco = reco
+                    best_reco_gor = gor
+
+    return [best_reco, best_reco_gor]
 
 for guideline in guideline_list:
     if guideline['guideline_language']['id'] == "de" and guideline['state'] == "published":
@@ -169,14 +189,13 @@ for guideline in guideline_list:
                         url = ""
 
                     if lit_ref['id'] in litref_reco_id_dict:
-                        #gor = reco_gor_dict[lit_ref['id']]
-                        for reco in litref_reco_id_dict[lit_ref['id']]:
-                            gor = get_GOR(reco)
-                            reco_type = get_reco_type(reco)
-                            in_qi = reco['uid'] in litref_qi_reco_id_list
-                            out_item = "%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s" % (guideline_full['short_title'], "\"%s\"" % guideline_full['published_version'], guideline_date.year, "%s, %s" % (guideline_author[1], guideline_author[2]), reco_type, gor, in_qi, position, tag, url, len(guideline_full['literature_list']))
-                            if out_item not in out_list:
-                                out_list.append(out_item)
+                        [reco, gor] = get_best_reco(litref_reco_id_dict[lit_ref['id']])
+                        reco_type = get_reco_type(reco)
+                        in_qi = reco['uid'] in litref_qi_reco_id_list
+                        out_item = "%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s" % (guideline_full['short_title'], "\"%s\"" % guideline_full['published_version'], guideline_date.year, "%s, %s" % (guideline_author[1], guideline_author[2]), reco_type, gor, in_qi, position, tag, url, len(guideline_full['literature_list']))
+                        if out_item not in out_list:
+                            out_list.append(out_item)
+
                     if lit_ref['id'] in litref_hgt_id_list:
                         out_item = "%s|%s|%s|%s|Hintergrund|||%s|%s|%s|%s" % (guideline_full['short_title'], "\"%s\"" % guideline_full['published_version'], guideline_date.year, "%s, %s" % (guideline_author[1], guideline_author[2]), position, tag, url, len(guideline_full['literature_list']))
                         if out_item not in out_list:

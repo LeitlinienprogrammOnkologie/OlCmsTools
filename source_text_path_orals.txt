@@ -1,0 +1,10 @@
+{
+    "files" : [
+        {
+            "title": "Oral Cavity Cancer",
+            "pll": "//dkg-dc-01/Daten/Daten/Arbeitsverzeichnisse/OL/PatientenLL/Manuskripte PLL/Mundhöhle/2023-02-01_Methodenreport_PLL_MundhöhlenkrebsWolff.docx",
+            "s3": "//dkg-dc-01/Daten/Daten/Arbeitsverzeichnisse/OL/1 Dokumente zu laufenden LL/Mundhöhlenkarzinom/Version 3 (2017-2020)/Leitlinienversionen/Langversion/LL_Mundhoehlenkarzinom_Langversion_3.0_22.03.2021_.docx",
+            "br": "//dkg-dc-01/Daten/Daten/Arbeitsverzeichnisse/OL/PatientenLL/Blaue Ratgeber/012_0012_MundGesicht.docx"
+        }
+    ]
+}

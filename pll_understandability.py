@@ -11,9 +11,10 @@ import numpy as np
 import nltk
 from nltk.tokenize import sent_tokenize, word_tokenize
 
-openai.api_key = "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"
+openai.api_key = "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"
 model_engine = "text-davinci-003"
 
+'''
 prompt = "Until further notice, switch to German language. Verwende niemals Nebensätze, niemals Relativsätze und umschreibe alle Fachwörter."
 completion = openai.Completion.create(
     engine=model_engine,
@@ -28,8 +29,9 @@ response = completion.choices[0].text
 print(response)
 
 pass
+'''
 
-with open("source_text_paths.txt", "r", encoding="utf-8") as f:
+with open("C:/Users/Gregor/PycharmProjects/OlCmsTools/source_text_path_orals.txt", "r", encoding="utf-8") as f:
     source_file_list = json.load(f)
 
 def analyze_paragraphs(guideline, type, paragraph_dict, translate_type=None):
@@ -44,10 +46,10 @@ def analyze_paragraphs(guideline, type, paragraph_dict, translate_type=None):
                 result += add_to_csv(guideline, type, key, metrics, text)
             if translate_type is not None:
                 translated_text = translate_text_to_easy_langage(text).replace("\n", " ").replace("\r", " ").replace("  ", " ").strip()
-                print(translated_text)
+                #print(translated_text)
                 metrics = index_calculator.Handle(translated_text)
-                if metrics is not None:
-                    result += add_to_csv(guideline, translate_type, key, metrics, translated_text)
+                #if metrics is not None:
+                result += add_to_csv(guideline, translate_type, key, metrics, translated_text)
     return result
 
 out_csv = "Leitlinie|Typ|Kapitel|Text|Chars|Words|Types|Sentences|Syllables|Polysyllable Words|Difficult Words|Words > 4|Words > 6|Words > 10|Words > 13|ASL|ASW|Flesh-Kincaid|Coleman-Liau|Gunning-Fog|Smog|ARI|LIX|Dale-Chall\n"
@@ -81,22 +83,31 @@ def add_to_csv(guideline, type, chapter, metric, text):
             metric.dale_chall_score
         )
     else:
-        result = None
+        result = "%s|%s|%s|%s||||||||||||||||||||\n" % (
+            guideline,
+            type,
+            chapter,
+            text
+        )
     return result
 
 def translate_text_to_easy_langage(text):
     prompt = "Folgenden Text in leichte Sprache umwandeln: %s" % text
-    completion = openai.Completion.create(
-        engine=model_engine,
-        prompt=prompt,
-        max_tokens=4096-len(prompt),
-        n=1,
-        stop=None,
-        temperature=0.5,
-    )
+    try:
+        completion = openai.Completion.create(
+            engine=model_engine,
+            prompt=prompt,
+            max_tokens=4096-len(prompt),
+            n=1,
+            stop=None,
+            temperature=0.5,
+        )
 
-    response = completion.choices[0].text
+        response = completion.choices[0].text
+    except:
+        response = "ERROR"
     return response
+
 
 for guideline in source_file_list['files']:
 
