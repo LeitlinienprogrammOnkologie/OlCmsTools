@@ -1,4 +1,4 @@
-file_path = "//dkg-dc-01/Daten/Daten/Arbeitsverzeichnisse/OL/Vorträge/G-I-N 2023/Easy Language Guidelines with KI/count_results.csv"
+file_path = "C:/Users/User/PycharmProjects/OlCmsTools/count_results.csv"
 
 with open(file_path, "r", encoding="utf-8") as f:
     csv_list = f.readlines()

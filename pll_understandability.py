@@ -11,8 +11,10 @@ import numpy as np
 import nltk
 from nltk.tokenize import sent_tokenize, word_tokenize
 
-openai.api_key = "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"
-model_engine = "text-davinci-003"
+nltk.download('averaged_perceptron_tagger')
+
+#openai.api_key = "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"
+#model_engine = "text-davinci-003"
 
 '''
 prompt = "Until further notice, switch to German language. Verwende niemals Nebensätze, niemals Relativsätze und umschreibe alle Fachwörter."
@@ -31,7 +33,7 @@ print(response)
 pass
 '''
 
-with open("C:/Users/Gregor/PycharmProjects/OlCmsTools/source_text_path_orals.txt", "r", encoding="utf-8") as f:
+with open("C:/Users/User/PycharmProjects/OlCmsTools/source_text_paths.txt", "r", encoding="utf-8") as f:
     source_file_list = json.load(f)
 
 def analyze_paragraphs(guideline, type, paragraph_dict, translate_type=None):
@@ -40,7 +42,7 @@ def analyze_paragraphs(guideline, type, paragraph_dict, translate_type=None):
     translated_text = ""
     for key, text_list in paragraph_dict.items():
         for text in text_list:
-            text = text.replace("\n", " ").replace("\r", " ").replace("  ", " ").strip()
+            text = text.strip().replace("\r", " ").replace("  ", " ").strip()
             metrics = index_calculator.Handle(text)
             if metrics is not None:
                 result += add_to_csv(guideline, type, key, metrics, text)
@@ -57,10 +59,10 @@ out_csv = "Leitlinie|Typ|Kapitel|Text|Chars|Words|Types|Sentences|Syllables|Poly
 def add_to_csv(guideline, type, chapter, metric, text):
     if metric is not None and metric.number_words > 0:
         result = "%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s\n" % (
-            guideline,
-            type,
-            chapter,
-            text,
+            guideline.replace("\r\n"," ").replace("\n", " ").replace("\r", " ").replace("  ", " ").strip(),
+            type.replace("\r\n"," ").replace("\n", " ").replace("\r", " ").replace("  ", " ").strip(),
+            chapter.replace("\r\n"," ").replace("\n", " ").replace("\r", " ").replace("  ", " ").strip(),
+            text.replace("\r\n"," ").replace("\n", " ").replace("\r", " ").replace("  ", " ").strip(),
             metric.number_chars,
             metric.number_words,
             metric.number_types,
@@ -91,6 +93,7 @@ def add_to_csv(guideline, type, chapter, metric, text):
         )
     return result
 
+
 def translate_text_to_easy_langage(text):
     prompt = "Folgenden Text in leichte Sprache umwandeln: %s" % text
     try:
@@ -112,17 +115,22 @@ def translate_text_to_easy_langage(text):
 for guideline in source_file_list['files']:
 
     if len(guideline['br']) > 0:
+        print(guideline['br'])
         parser = BrWordFileParser()
         paragraph_dict = parser.Parse(guideline['br'])
         out_csv += analyze_paragraphs(guideline['title'], "BR", paragraph_dict)
 
-    parser = PllWordFileParser()
-    paragraph_dict = parser.Parse(guideline['pll'])
-    out_csv += analyze_paragraphs(guideline['title'], "PLL", paragraph_dict, "DV3")
+    if len(guideline['pll']) > 0:
+        print(guideline['pll'])
+        parser = PllWordFileParser()
+        paragraph_dict = parser.Parse(guideline['pll'])
+        out_csv += analyze_paragraphs(guideline['title'], "PLL", paragraph_dict)
 
-    parser = S3WordFileParser()
-    paragraph_dict = parser.Parse(guideline['s3'])
-    out_csv += analyze_paragraphs(guideline['title'], "S3L", paragraph_dict)
+    if len(guideline['s3']) > 0:
+        print(guideline['s3'])
+        parser = S3WordFileParser()
+        paragraph_dict = parser.Parse(guideline['s3'])
+        out_csv += analyze_paragraphs(guideline['title'], "S3L", paragraph_dict)
 
     with open("count_results.csv", "w", encoding="utf-8") as f:
         f.write(out_csv)
