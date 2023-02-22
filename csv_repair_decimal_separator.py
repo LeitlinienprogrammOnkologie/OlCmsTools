@@ -1,9 +1,10 @@
 file_path = "//dkg-dc-01/Daten/Daten/Arbeitsverzeichnisse/OL/Vorträge/G-I-N 2023/Easy Language Guidelines with KI/count_results.csv"
+file_path = "pll_undestandability_with_KI.csv"
+index_list = [3, 4, 5, 6, 8, 9, 10, 11]
 
 with open(file_path, "r", encoding="utf-8") as f:
     csv_list = f.readlines()
 
-index_list = [15, 16, 17, 18, 19, 20, 21, 22, 23]
 repair_char = [".", ","]
 
 for line_index in range(len(csv_list)):
