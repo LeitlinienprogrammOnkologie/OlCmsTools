@@ -2,69 +2,105 @@
     "files" : [
         {
             "title": "Follicular Lymphoma",
-            "pll": "//dkg-dc-01/Daten/Daten/Arbeitsverzeichnisse/OL/PatientenLL/Manuskripte PLL/Follikuläres Lymphom/2022-09-16_PLL_Follikuläres Lyphom.docx",
+            "pll": "//dkg-dc-01/Daten/Daten/Arbeitsverzeichnisse/OL/Vorträge/EbM-Kongress 2023/Verständlichkeitsanalyse PLL/PLL-Texte/Follikuläres Lyphom.docx",
             "s3": "//dkg-dc-01/Daten/Daten/Arbeitsverzeichnisse/OL/1 Dokumente zu laufenden LL/follLymphom/Leitlinienversionen/Version 1/LL_Foll_Lymphom_Langversion_1.0_TL.docx",
             "br": ""
         },
         {
             "title": "Prevention of Skin Cancer",
-            "pll": "//dkg-dc-01/Daten/Daten/Arbeitsverzeichnisse/OL/PatientenLL/Manuskripte PLL/Prävention von Hautkrebs/2022-09-14_Gesundheitsleitlinie_Hautkrebsprävention.docx",
-            "s3": "",
+            "pll": "//dkg-dc-01/Daten/Daten/Arbeitsverzeichnisse/OL/Vorträge/EbM-Kongress 2023/Verständlichkeitsanalyse PLL/PLL-Texte/Hautkrebsprävention.docx",
+            "s3": "//dkg-dc-01/Daten/Daten/Arbeitsverzeichnisse/OL/1 Dokumente zu laufenden LL/Prävention von Hautkrebs/Version 2 (2017-2020)/Leitlinienversionen/Langversion/LL_Prävention von Hautkrebs_Langversion 2.1_19082021.docx",
             "br": ""
         },
         {
             "title": "Hepatocellular Cancer",
-            "pll": "//dkg-dc-01/Daten/Daten/Arbeitsverzeichnisse/OL/PatientenLL/Manuskripte PLL/Leberkrebs/A_2021-11-12_Patientenleitlinie_Leberkrebs_final.docx",
+            "pll": "//dkg-dc-01/Daten/Daten/Arbeitsverzeichnisse/OL/Vorträge/EbM-Kongress 2023/Verständlichkeitsanalyse PLL/PLL-Texte/Galle.docx",
             "s3": "//dkg-dc-01/Daten/Daten/Arbeitsverzeichnisse/OL/1 Dokumente zu laufenden LL/Prävention von Hautkrebs/Version 2 (2017-2020)/Leitlinienversionen/Langversion/LL Leitlinie Prävention von Hautkrebs_Langversion 2.01_15012021.docx",
+            "br": "//dkg-dc-01/Daten/Daten/Arbeitsverzeichnisse/OL/Vorträge/EbM-Kongress 2023/Verständlichkeitsanalyse PLL/BR-Texte/015_0022_LeberGalle.docx"
+        },
+        {
+            "title": "Hepatocellular Cancer",
+            "pll": "//dkg-dc-01/Daten/Daten/Arbeitsverzeichnisse/OL/Vorträge/EbM-Kongress 2023/Verständlichkeitsanalyse PLL/PLL-Texte/Leber.docx",
+            "s3": "",
             "br": ""
         },
         {
             "title": "Testicular Cancer",
-            "pll": "//dkg-dc-01/Daten/Daten/Arbeitsverzeichnisse/OL/PatientenLL/Manuskripte PLL/Hoden/2022-09-16_PLL_Hodenkrebs_Vorläufig V0.2.docx",
+            "pll": "//dkg-dc-01/Daten/Daten/Arbeitsverzeichnisse/OL/Vorträge/EbM-Kongress 2023/Verständlichkeitsanalyse PLL/PLL-Texte/Hoden.docx",
             "s3": "//dkg-dc-01/Daten/Daten/Arbeitsverzeichnisse/OL/1 Dokumente zu laufenden LL/HodenTu/Leitlinienversionen/Version 1/Langversion/LL_Hodentumoren_Langversion_1.2_22.04.2021.docx",
-            "br": ""
+            "br": "//dkg-dc-01/Daten/Daten/Arbeitsverzeichnisse/OL/Vorträge/EbM-Kongress 2023/Verständlichkeitsanalyse PLL/BR-Texte/016_0012_Hodenkrebs.docx"
         },
         {
             "title": "Hodgkin Lymphoma",
             "pll": "",
-            "s3": "",
+            "s3": "//dkg-dc-01/Daten/Daten/Arbeitsverzeichnisse/OL/1 Dokumente zu laufenden LL/Hodgkin/Version 3.0 (2018-LG)/Leitlinienversionen/Version 3/Langversion/LL_Hodgkin_Lymphom_Langversion_3.2_17.10.2022_.docx",
             "br": ""
         },
         {
             "title": "Malignant Melanoma",
-            "pll": "//dkg-dc-01/Daten/Daten/Arbeitsverzeichnisse/OL/PatientenLL/Manuskripte PLL/Melanom/2021-11-10_PLL_Melanom.docx",
-            "s3": "//dkg-dc-01/Daten/Daten/Arbeitsverzeichnisse/OL/1 Dokumente zu laufenden LL/Hodgkin/Version 2.0 (2015-2018)/Version 2/Version 2.1/LL Hodgkin-Lymphom Langversion_2.1_03.05.docx",
-            "br": ""
+            "pll": "//dkg-dc-01/Daten/Daten/Arbeitsverzeichnisse/OL/Vorträge/EbM-Kongress 2023/Verständlichkeitsanalyse PLL/PLL-Texte/Melanom.docx",
+            "s3": "//dkg-dc-01/Daten/Daten/Arbeitsverzeichnisse/OL/1 Dokumente zu laufenden LL/Melanom/Version 3 (2016-2018)/Leitlinienversionen/Version 3.3/2020-03-26_LL_Melanom_Langversion_3.3_nach Publikation_für nächste Version.docx",
+            "br": "//dkg-dc-01/Daten/Daten/Arbeitsverzeichnisse/OL/Vorträge/EbM-Kongress 2023/Verständlichkeitsanalyse PLL/BR-Texte/005_0012_Hautkrebs_v02-WORDEXPORT.docx"
         },
         {
             "title": "Multiple Myeloma",
-            "pll": "//dkg-dc-01/Daten/Daten/Arbeitsverzeichnisse/OL/PatientenLL/Manuskripte PLL/Multiples Myelom/PLL Multiples Myelom_FinaleVersion_31.10.2022_SM_gw.docx",
-            "s3": "",
+            "pll": "//dkg-dc-01/Daten/Daten/Arbeitsverzeichnisse/OL/Vorträge/EbM-Kongress 2023/Verständlichkeitsanalyse PLL/PLL-Texte/Multiples Myelom.docx",
+            "s3": "//dkg-dc-01/Daten/Daten/Arbeitsverzeichnisse/OL/1 Dokumente zu laufenden LL/multiples_Myelom/Versionen/Langversion/LL_Multiples Myelom_Langversion_1.0_17.02.2022.docx",
             "br": ""
         },
         {
             "title": "Oral Cavity Cancer",
-            "pll": "//dkg-dc-01/Daten/Daten/Arbeitsverzeichnisse/OL/PatientenLL/Manuskripte PLL/Mundhöhle/2023-02-01_Methodenreport_PLL_MundhöhlenkrebsWolff.docx",
+            "pll": "//dkg-dc-01/Daten/Daten/Arbeitsverzeichnisse/OL/Vorträge/EbM-Kongress 2023/Verständlichkeitsanalyse PLL/PLL-Texte/Mundhöhle.docx",
             "s3": "//dkg-dc-01/Daten/Daten/Arbeitsverzeichnisse/OL/1 Dokumente zu laufenden LL/Mundhöhlenkarzinom/Version 3 (2017-2020)/Leitlinienversionen/Langversion/LL_Mundhoehlenkarzinom_Langversion_3.0_22.03.2021_.docx",
-            "br": "//dkg-dc-01/Daten/Daten/Arbeitsverzeichnisse/OL/PatientenLL/Blaue Ratgeber/012_0012_MundGesicht.docx"
+            "br": "//dkg-dc-01/Daten/Daten/Arbeitsverzeichnisse/OL/Vorträge/EbM-Kongress 2023/Verständlichkeitsanalyse PLL/BR-Texte/012_0012_MundGesicht.docx"
         },
         {
             "title": "Pancreatic Cancer",
-            "pll": "",
-            "s3": "",
-            "br": ""
+            "pll": "//dkg-dc-01/Daten/Daten/Arbeitsverzeichnisse/OL/Vorträge/EbM-Kongress 2023/Verständlichkeitsanalyse PLL/PLL-Texte/Pankreas.docx",
+            "s3": "//dkg-dc-01/Daten/Daten/Arbeitsverzeichnisse/OL/1 Dokumente zu laufenden LL/Pankreaskarzinom/2. Förderung/Version 2 (2018-/Leitlinienversionen/Langversion/LL Pankreaskarzinom_Langversion_2.0_30.12.2021.docx",
+            "br": "//dkg-dc-01/Daten/Daten/Arbeitsverzeichnisse/OL/Vorträge/EbM-Kongress 2023/Verständlichkeitsanalyse PLL/BR-Texte/014_0012_Bauchspeicheldr_v06-WORDEXPORT.docx"
         },
         {
             "title": "Penis Cancer",
-            "pll": "//dkg-dc-01/Daten/Daten/Arbeitsverzeichnisse/OL/PatientenLL/Manuskripte PLL/Pankreas/2022-01-25_PLL_Pankreas_finaleVersion.docx",
-            "s3": "",
+            "pll": "//dkg-dc-01/Daten/Daten/Arbeitsverzeichnisse/OL/Vorträge/EbM-Kongress 2023/Verständlichkeitsanalyse PLL/PLL-Texte/Penis.docx",
+            "s3": "//dkg-dc-01/Daten/Daten/Arbeitsverzeichnisse/OL/1 Dokumente zu laufenden LL/Peniskarzinom/Leitlinienversionen/Version 1/S3 Leitlinie Peniskarzinom__zusammengefügt.docx",
             "br": ""
         },
         {
             "title": "Cevical Cancer",
-            "pll": "//dkg-dc-01/Daten/Daten/Arbeitsverzeichnisse/OL/PatientenLL/Manuskripte PLL/Gebärmutterhals (Zervix)/Methodenreport_PLL Gebärmutterhalskrebs_final.docx",
-            "s3": "",
+            "pll": "//dkg-dc-01/Daten/Daten/Arbeitsverzeichnisse/OL/Vorträge/EbM-Kongress 2023/Verständlichkeitsanalyse PLL/PLL-Texte/Gebärmutterhals.docx",
+            "s3": "//dkg-dc-01/Daten/Daten/Arbeitsverzeichnisse/OL/1 Dokumente zu laufenden LL/Zervixkarzinom/Version 2 (2017-XX)/Leitlinienversionen/Langversion/LL_Zervixkarzinom_Langversion_2.0_02.03.docx",
             "br": ""
         },
+        {
+            "title": "Endometrial",
+            "pll": "//dkg-dc-01/Daten/Daten/Arbeitsverzeichnisse/OL/Vorträge/EbM-Kongress 2023/Verständlichkeitsanalyse PLL/PLL-Texte/Gebärmutterkörper.docx",
+            "s3": "//dkg-dc-01/Daten/Daten/Arbeitsverzeichnisse/OL/1 Dokumente zu laufenden LL/Endometrium/Version 2 (2019-2022)/Leitlinienversionen/Langversion/LL_Endometriumkarzinom_Langversion 2.0_2023-01-02_korr.docx",
+            "br": "//dkg-dc-01/Daten/Daten/Arbeitsverzeichnisse/OL/Vorträge/EbM-Kongress 2023/Verständlichkeitsanalyse PLL/BR-Texte/003_0022_Gebaermutter_v01-WORDEXPORT.docx"
+        },
+        {
+            "title": "Complementary Medicine",
+            "pll": "//dkg-dc-01/Daten/Daten/Arbeitsverzeichnisse/OL/Vorträge/EbM-Kongress 2023/Verständlichkeitsanalyse PLL/PLL-Texte/Komplementärmedizin.docx",
+            "s3": "//dkg-dc-01/Daten/Daten/Arbeitsverzeichnisse/OL/1 Dokumente zu laufenden LL/KAM/Version 1/Leitlinienversionen/Langversion/LL_Komplementär_Langversion_1.1_09112021.docx",
+            "br": ""
+        },
+        {
+            "title": "Palliative Medicine",
+            "pll": "//dkg-dc-01/Daten/Daten/Arbeitsverzeichnisse/OL/Vorträge/EbM-Kongress 2023/Verständlichkeitsanalyse PLL/PLL-Texte/Palliativ.docx",
+            "s3": "//dkg-dc-01/Daten/Daten/Arbeitsverzeichnisse/OL/1 Dokumente zu laufenden LL/Palli/Förderung 2 2019/Version 2/Version 2.2/2020-03-27_LL_Palliativmedizin_2.2_Langversion_GW.docx",
+            "br": ""
+        },
+        {
+            "title": "Psychooncology",
+            "pll": "//dkg-dc-01/Daten/Daten/Arbeitsverzeichnisse/OL/Vorträge/EbM-Kongress 2023/Verständlichkeitsanalyse PLL/PLL-Texte/Psychoonkologie.docx",
+            "s3": "//dkg-dc-01/Daten/Daten/Arbeitsverzeichnisse/OL/1 Dokumente zu laufenden LL/PSO/Version 2/Leitlinienversionen/Langversion/LL_Psychoonkologie_Langversion_2.01_19.12.2022__.docx",
+            "br": ""
+        },
+        {
+            "title": "Soft Tissue Sarcoma",
+            "pll": "//dkg-dc-01/Daten/Daten/Arbeitsverzeichnisse/OL/Vorträge/EbM-Kongress 2023/Verständlichkeitsanalyse PLL/PLL-Texte/Weichgewebesarkome.docx",
+            "s3": "//dkg-dc-01/Daten/Daten/Arbeitsverzeichnisse/OL/1 Dokumente zu laufenden LL/adulte Weichgewebssarkome/Leitlinienversionen/Langversion/2022-03-28_LL_Weichgewebesarkome_Langversion_1.1_TL_GW.docx",
+            "br": ""
+        }
     ]
 }
