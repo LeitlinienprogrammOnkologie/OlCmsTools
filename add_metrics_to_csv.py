@@ -14,7 +14,7 @@ nlp = de_dep_news_trf.load()
 tagger = HanoverTagger('morphmodel_ger.pgz')
 index_calculator = IndexCalculator()
 
-input_file = "//dkg-dc-01/Daten/Daten/Arbeitsverzeichnisse/OL/Vorträge/G-I-N 2023/Easy Language Guidelines with KI/2023-02-21_SUMM_PLL_DV3-Children.xlsx"
+input_file = "//dkg-dc-01/Daten/Daten/Arbeitsverzeichnisse/OL/Vorträge/G-I-N 2023/Easy Language Guidelines with KI/2023-02-21_SUMM_PLL_DV3-Children_7 Words_no explanations.xlsx"
 
 df = pd.read_excel(input_file)
 

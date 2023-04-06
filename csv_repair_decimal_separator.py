@@ -1,5 +1,7 @@
 file_path = "//dkg-dc-01/Daten/Daten/Arbeitsverzeichnisse/OL/Vorträge/G-I-N 2023/Easy Language Guidelines with KI/count_results.csv"
 file_path = "pll_undestandability_with_KI.csv"
+file_path = "//dkg-dc-01/Daten/Daten/Arbeitsverzeichnisse/OL/Vorträge/EbM-Kongress 2023/Verständlichkeitsanalyse PLL/2023-03-14_Verständlichkeit_WSF.csv"
+
 index_list = [3, 4, 5, 6, 8, 9, 10, 11]
 
 with open(file_path, "r", encoding="utf-8") as f:
