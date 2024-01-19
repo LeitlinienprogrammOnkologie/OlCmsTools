@@ -13,6 +13,24 @@ pg_db = config.get("PGSQL", "database")
 pg_user = config.get("PGSQL", "user")
 pg_pwd = config.get("PGSQL", "password")
 
+topic_dict = {
+    "Diagnose": [ "Untersuchung",
+        "Diagnostizieren",
+        "Feststellen",
+        "Diagnostische Verfahren",
+        "Labor",
+        "Pathologie",
+        "Gewebeprobe",
+        "Bildgebend",
+        "Biopsie",
+        "Histologie",
+        "Zytologie",
+        "Screening",
+        "Früherkennung",
+        "Stadium",
+    ]
+}
+
 conn = psycopg2.connect(
     host=pg_host,
     database=pg_db,
@@ -40,6 +58,9 @@ def get_recos(guideline_data):
 
 for i in range(N_RECO):
     guideline_index = i % len(rows)
+    guideline_topic_list = list(topic_dict.keys())
+    guideline_topic_index = i % len(guideline_topic_list)
+    guideline_topic = guideline_topic_list[guideline_topic_index]
     if rows[guideline_index][0] not in recos:
         recos[rows[guideline_index][0]] = get_recos(rows[guideline_index])
 
@@ -47,6 +68,9 @@ for i in range(N_RECO):
     while rnd_reco in result:
         rnd_reco = recos[rows[guideline_index][0]][random.randint(0, len(recos[rows[guideline_index][0]])) - 1]
 
+    for k, v in topic_dict.items():
+        if any([x in rnd_reco[6] for x in v]):
+            pass
     buffer = list(rnd_reco)
     buffer.insert(0, rows[guideline_index][1])
     rnd_reco = tuple(buffer)
