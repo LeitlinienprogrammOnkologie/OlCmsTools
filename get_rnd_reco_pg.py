@@ -13,23 +13,97 @@ pg_db = config.get("PGSQL", "database")
 pg_user = config.get("PGSQL", "user")
 pg_pwd = config.get("PGSQL", "password")
 
+relevant_topic_list = [
+    "Epidemiology / Risikofaktoren",
+    "Diagnose",
+    "Screening/Biopsie",
+    "Behandlung",
+    "Reha/FollowUp",
+    "Psychoonkologie",
+    "Palliativ"
+]
+
 topic_dict = {
-    "Diagnose": [ "Untersuchung",
-        "Diagnostizieren",
+    "Diagnose": [
+        "Untersuchung",
         "Feststellen",
-        "Diagnostische Verfahren",
         "Labor",
-        "Pathologie",
-        "Gewebeprobe",
         "Bildgebend",
+        "Diagnos"
+    ],
+    "Screening/Biopsie": [
+        "Screening",
+        "Vorsorgeuntersuchung",
+        "Gewebeprobe",
+        "Vorsorge",
+        "Pathologie",
         "Biopsie",
         "Histologie",
         "Zytologie",
-        "Screening",
         "Früherkennung",
         "Stadium",
+        "Material"
+    ],
+    "Reha/FollowUp": [
+        "Reha",
+        "Follow",
+        "Nachsorge",
+        "Nachbehandlung",
+        "Langzeitbetreuung",
+        "Therapiebegleitung",
+        "Erholung",
+        "Gesundheitsmanagement",
+        "Reintegrationsprogramm",
+        "Langzeitüberwachung",
+        "Nachtherapie",
+    ],
+    "Behandlung" : [
+        "Therapie",
+        "Metastasiert",
+        "Behandlung",
+    ],
+    "Palliativ" : [
+        "Palliativ",
+        "Symptomlinderung",
+        "Lebensqualität",
+        "Schmerzmanagement",
+        "Hospiz",
+        "End-of-Life",
+        "end of life"
+        "Komfortpflege",
+        "Lebensbegleitung",
+        "Sterbebegleitung"
+    ],
+    "Psychoonkologie": [
+        "Psycho",
+        "Emotional",
+        "Stress",
+        "Psychisch",
+        "Angst",
+        "Depression",
+        "Bewältigung",
+        "Kommunikation",
+        "Patientenbetreuung",
+        "Seelisch",
+    ],
+    "Epidemiology / Risikofaktoren": [
+        "Epidemiolog",
+        "Risikofaktoren",
+        "Krebshäufigkeit",
+        "Krebsrisiko",
+        "Prävalenz",
+        "Inzidenz",
+        "Risikofaktor",
+        "Statistik",
+        "Erkrankungswahrscheinlichkeit",
+        "Prädisposition",
+        "Risikogruppe",
+        "Lebensstilfaktoren",
+        "Genetische Faktoren",
+        "Umweltfaktoren",
     ]
 }
+
 
 conn = psycopg2.connect(
     host=pg_host,
@@ -44,7 +118,7 @@ cur.close()
 
 recos = {}
 
-result = []
+reco_result = []
 def get_recos(guideline_data):
     cur = conn.cursor()
 
@@ -56,25 +130,44 @@ def get_recos(guideline_data):
     cur.close()
     return reco_rows
 
-for i in range(N_RECO):
-    guideline_index = i % len(rows)
+def get_next_reco(topic, recos):
+    attempt = 0
+    topic_keyword_list = topic_dict[topic]
+    while attempt < len(recos):
+        rnd_reco = recos[random.randint(0, len(recos) - 1)]
+        reco_text = rnd_reco[6]
+        if any([x.lower() in reco_text.lower() for x in topic_keyword_list]):
+            return rnd_reco
+        attempt += 1
+
+    return None
+
+for row in rows:
+    recos[row[0]] = get_recos(row)
+
+guideline_index = -1
+topic_index = 0
+while len(reco_result) < N_RECO:
+    guideline_index += 1
+    if guideline_index >= len(rows):
+        guideline_index = 0
+        topic_index += 1
+        if topic_index >= len(topic_dict):
+            topic_index = 0
+
     guideline_topic_list = list(topic_dict.keys())
-    guideline_topic_index = i % len(guideline_topic_list)
-    guideline_topic = guideline_topic_list[guideline_topic_index]
-    if rows[guideline_index][0] not in recos:
-        recos[rows[guideline_index][0]] = get_recos(rows[guideline_index])
+    guideline_topic = guideline_topic_list[topic_index]
 
-    rnd_reco = recos[rows[guideline_index][0]][random.randint(0, len( recos[rows[guideline_index][0]])) - 1]
-    while rnd_reco in result:
-        rnd_reco = recos[rows[guideline_index][0]][random.randint(0, len(recos[rows[guideline_index][0]])) - 1]
+    next_reco = get_next_reco(guideline_topic, recos[rows[guideline_index][0]])
 
-    for k, v in topic_dict.items():
-        if any([x in rnd_reco[6] for x in v]):
-            pass
-    buffer = list(rnd_reco)
-    buffer.insert(0, rows[guideline_index][1])
-    rnd_reco = tuple(buffer)
-    result.append(rnd_reco)
+    if next_reco is not None:
+        buffer = list(next_reco)
+        buffer.insert(0, rows[guideline_index][1])
+        buffer.insert(1, guideline_topic)
+        next_reco = tuple(buffer)
+        reco_result.append(next_reco)
+    else:
+        print("No more recommendations in guideline %s with topic %s" % (rows[guideline_index][1], guideline_topic))
 
 pass
 
