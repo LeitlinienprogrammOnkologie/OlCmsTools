@@ -40,7 +40,20 @@ qrcode_size = Cm(3.09)
 qrcode_spacer_y = Cm(0.7)
 page_max_y = Cm(28.5)
 
+y_spacer_buffer = Cm(0.5)
+y_factor = (y_spacer_buffer + y_spacer) / y_spacer
+y_spacer += y_spacer_buffer
+
 slide_idx = 0
+
+def calculate_top_position(is_left_shape, xpos_left, xpos_right, new_y_pos, shape_width, shape_height):
+    # Check the shape position and set initial parameters
+    if is_left_shape:
+        top = new_y_pos - shape_width  # Since the shape is rotated, the top position will shift by the width of the shape
+    else:
+        top = new_y_pos + shape_height  # Since the shape is rotated, the top position will shift by the height of the shape
+
+    return top
 
 if create_s3ll:
     prs = Presentation("./qrcodes/s3ll/S3LL Übersicht_Template.pptx")
@@ -76,10 +89,12 @@ if create_s3ll:
             left = xpos_left
             frame_rotation = str(270*60000)
             rotation = 90
+            text_y_pos = new_y_pos - shape_width
         else:
             left = xpos_right
             frame_rotation = str(90*60000)
             rotation = 270
+            text_y_pos = new_y_pos + shape_height
 
         new_shape = target_slide.shapes.add_shape(
             shape_type,
@@ -102,10 +117,13 @@ if create_s3ll:
             text_x_pos = Cm(9.95)
             qr_code_x = text_x_pos + Cm(5.84)
 
+        text_y_pos = counter * Cm(4.3) + Cm(2.9)
+        tf_height = shape_width
+
         text_shape = target_slide.shapes.add_shape(
             1,
             text_x_pos,
-            tf_start_y + counter * (tf_height + tf_spacer_y),
+            text_y_pos,
             tf_width,
             tf_height
         )
@@ -116,14 +134,14 @@ if create_s3ll:
         r = para.add_run()
         r.text = s3ll.replace("QR_", "").split(".")[0]
         r.font.color.rgb = RGBColor(0, 0, 0)
-        r.font.size = Pt(14)
+        r.font.size = Pt(13)
         r.font.bold = True
         r.font.name = "Lucida Sans"
 
         para.alignment = PP_PARAGRAPH_ALIGNMENT.LEFT
-        text_shape.text_frame.vertical_anchor = MSO_VERTICAL_ANCHOR.TOP
+        text_shape.text_frame.vertical_anchor = MSO_VERTICAL_ANCHOR.MIDDLE
 
-        qr_code_y = tf_start_y + counter * (tf_height + tf_spacer_y) + 0.5 * (tf_height - qrcode_size)
+        qr_code_y = text_y_pos + Pt(4)
 
         qr_code = target_slide.shapes.add_picture("./qrcodes/s3ll/%s" % s3ll, qr_code_x, qr_code_y, width=qrcode_size, height=qrcode_size)
 
